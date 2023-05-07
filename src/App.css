@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+  color: white;
+}
+.container-body {
+  height: 9000px;
+ }
+ 
+ .bg-container {
+  position: relative;
+  width: 70% !important;
+  height: 600px;
+  margin: auto;
+  margin-top: 55%;
+ }
+ .bg-container h1 {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+  font-size: 70px;
+ }

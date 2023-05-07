@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  background-color: #ddd;
+}
+
+.header nav ul {
+  display: flex;
+  align-items: center;
+}
+
+.header nav ul li {
+  list-style: none;
+  margin-right: 1rem;
+}

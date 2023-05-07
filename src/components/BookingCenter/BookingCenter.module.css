@@ -1,0 +1,132 @@
+.section {
+  min-height: 60vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flight_backGround {
+  background: url("https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+    no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.hotelt_backGround {
+  background: url("https://images.pexels.com/photos/2017802/pexels-photo-2017802.jpeg?auto=compress&cs=tinysrgb&w=800")
+    no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.wrapper {
+  width: 85%;
+  /* height: 100%; */
+  margin-top: -5%;
+}
+.top_head h1 {
+  color: white;
+}
+
+.booking_tab {
+  display: flex;
+  align-items: center;
+}
+
+.booking_tab button {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  /* border-radius: 10px; */
+  margin-right: 7px;
+  background-color: unset;
+  font-size: 20px;
+  transition: all ease 0.5s;
+  color: white;
+}
+
+.booking_tab button:hover {
+  background-color: rgba(62, 91, 147, 0.187);
+  color: white;
+  cursor: pointer;
+}
+
+.open_tab {
+  display: flex;
+  align-items: center;
+}
+.open_tab select {
+  padding: 10px;
+  margin-right: 10px;
+  background-color: rgba(251, 251, 251, 0.316);
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+.flight_booking_wrapper {
+  background-color: rgba(100, 148, 237, 0.835);
+  padding: 20px;
+}
+
+.custom_input_container {
+  margin-top: 1.3rem;
+  display: flex;
+}
+
+.custom_input {
+  background-color: white;
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.input_text {
+    flex-basis: 50%;
+    padding: 10px;
+}
+
+.custom_input input {
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+
+.custom_input input[type="text"] {
+  width: 100%;
+}
+
+.custom_input p {
+  font-size: 12px;
+}
+
+.booking_button button {
+  padding: 20px;
+  font-size: 14px;
+  background-color: chocolate;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.info_tab {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+.info_tab p {
+    color: white;
+}
+
+.date_and_pay_button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
