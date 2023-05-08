@@ -7,28 +7,43 @@ const HotelBooking = () => {
     <div className={classes.flight_booking_wrapper}>
       <div className={classes.open_tab}>
         <select>
-          <option value="Round trip">Round trip</option>
-          <option value="One way">One way</option>
+          <option>WHAT ARE YOU TRAVELLING FOR?</option>
+          <option value="Round trip">Business</option>
+          <option value="One way">Liesure</option>
         </select>
 
         {/* Numbers of passanger */}
         <select>
-          <option value="1">1 Passanger</option>
-          <option value="2">2 Passangers</option>
-          <option value="3">3 Passangers</option>
-          <option value="4">4 Passangers</option>
-          <option value="5">5 Passangers</option>
-          <option value="6">6 Passangers</option>
-          <option value="7">7 Passangers</option>
-          <option value="8">8 Passangers</option>
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+          <option value="3">3 Guests</option>
+          <option value="4">4 Guests</option>
+          <option value="5">5 Guests</option>
+          <option value="6">6 Guests</option>
+          <option value="7">7 Guests</option>
+          <option value="8">8 Guests</option>
         </select>
 
+
         <select>
+          <option value="1">1 Room</option>
+          <option value="2">2 Rooms</option>
+          <option value="3">3 Rooms</option>
+          <option value="4">4 Rooms</option>
+          <option value="5">5 Rooms</option>
+          <option value="6">6 Rooms</option>
+          <option value="7">7 Rooms</option>
+          <option value="8">8 Rooms</option>
+        </select>
+
+
+
+        {/* <select>
           <option value="economy">Economy</option>
           <option value="premium-economy">Premium Economy </option>
-          <option value="buesiness">Buesiness</option>
+          <option value="buesiness">Business</option>
           <option value="first-class">First class</option>
-        </select>
+        </select> */}
       </div>
 
       <div className={classes.custom_input_container}>
