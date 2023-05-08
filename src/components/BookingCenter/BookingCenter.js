@@ -16,6 +16,7 @@ const BookingCenter = () => {
       <div className={classes.wrapper}>
         <div className={classes.top_head}>
           <h1>Decentralized Travel Booking DAPP</h1>
+          <h1>Balance: ETH 0.0001 </h1>
         </div>
         <br />
 

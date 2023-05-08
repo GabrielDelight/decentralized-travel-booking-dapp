@@ -14,7 +14,7 @@
 }
 
 .hotelt_backGround {
-  background: url("https://images.pexels.com/photos/2017802/pexels-photo-2017802.jpeg?auto=compress&cs=tinysrgb&w=800")
+  background: url("https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=800")
     no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -27,6 +27,12 @@
 }
 .top_head h1 {
   color: white;
+}
+
+.top_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .booking_tab {

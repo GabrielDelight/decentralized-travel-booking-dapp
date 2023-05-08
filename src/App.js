@@ -1,6 +1,7 @@
 import React from "react";
 import BookingCard from "./components/BookingCard/BookingCard";
 import BookingCenter from "./components/BookingCenter/BookingCenter";
+import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import { FlightBookingData } from "./data/FlightBookingData";
 import { HotelBookingData } from "./data/HotelBookingData";
