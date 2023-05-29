@@ -7,7 +7,7 @@ const BookingCard = (props) => {
       <h1 className={classes.title}>{props.title}</h1>
       <div className={classes.card_section}>
         {props.data.map((cur, index) => (
-          <BookingCardList image={cur.image} key={index} />
+          <BookingCardList item={cur} key={index} />
         ))}
       </div>
     </section>

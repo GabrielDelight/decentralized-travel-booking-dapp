@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./BookingCenter.module.css";
 import CustomInput from "./CustomInput";
 
 const FlightBooking = () => {
+  const [formInput, setFormInput] = useState({
+    fromWhere: "",
+    toWhere: "",
+    forwardTrip: "",
+    passanger: 1,
+    LeavingOn: new Date().toISOString().substr(0, 10),
+    returningOn: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString().slice(0,10),
+    flightType: "Economy",
+    roundTrip: true,
+  });
+
+  const onChangeHandler = (e) => {
+    setFormInput((prevState) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+  const onPayHandler = () => {
+    console.log(formInput)
+  };
+
   return (
     <div className={classes.flight_booking_wrapper}>
       <div className={classes.open_tab}>
-        <select>
+        <select name={"forwardTrip"} onChange={onChangeHandler}>
           <option value="Round trip">Round trip</option>
           <option value="One way">One way</option>
         </select>
 
         {/* Numbers of passanger */}
-        <select>
+        <select name={"passanger"} onChange={onChangeHandler}>
           <option value="1">1 Passanger</option>
           <option value="2">2 Passangers</option>
           <option value="3">3 Passangers</option>
@@ -23,7 +46,7 @@ const FlightBooking = () => {
           <option value="8">8 Passangers</option>
         </select>
 
-        <select>
+        <select name={"flightType"} onChange={onChangeHandler}>
           <option value="economy">Economy</option>
           <option value="premium-economy">Premium Economy </option>
           <option value="buesiness">Buesiness</option>
@@ -35,24 +58,27 @@ const FlightBooking = () => {
         <CustomInput className={classes.input_text} label={"From where?"}>
           <input
             type={"text"}
+            name={"fromWhere"}
+            onChange={onChangeHandler}
             list={"address1"}
             placeholder="Search for a country"
-            value={"UNITED STATE"}
-          />
+            value={formInput.fromWhere}          />
           <datalist id="address1">
-            <option selected value={"Afganistan"}></option>
+            <option defaultValue value={"Afganistan"}></option>
           </datalist>
         </CustomInput>
 
         <CustomInput className={classes.input_text} label={"To where?"}>
           <input
             type={"text"}
+            name={"toWhere"}
+            onChange={onChangeHandler}
             list={"address1"}
             placeholder="Search for a country"
-            value={"UNITED STATE"}
+            value={formInput.toWhere}
           />
           <datalist id="address1">
-            <option selected value={"Afganistan"}></option>
+            <option defaultValue value={"Afganistan"}></option>
           </datalist>
         </CustomInput>
 
@@ -61,20 +87,24 @@ const FlightBooking = () => {
             <CustomInput label={"Leaving on"}>
               <input
                 type={"date"}
-                value={new Date().toISOString().substr(0, 10)}
+                name={"LeavingOn"}
+                onChange={onChangeHandler}
+                value={formInput.LeavingOn}
                 min={new Date().toISOString().substr(0, 10)}
               />
             </CustomInput>
             <CustomInput label={"Returning on"}>
               <input
                 type={"date"}
-                value={new Date().toISOString().substr(0, 10)}
+                name={"returningOn"}                
+                onChange={onChangeHandler}
+                value={formInput.returningOn}
                 min={new Date().toISOString().substr(0, 10)}
               />
             </CustomInput>
           </div>
           <div className={classes.booking_button}>
-            <button>Book now</button>
+            <button onClick={onPayHandler}>Book now</button>
           </div>
         </div>
       </div>

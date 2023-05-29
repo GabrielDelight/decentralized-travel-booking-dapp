@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all ease .5s;
 }
 
 .flight_backGround {
@@ -22,17 +23,17 @@
 
 .wrapper {
   width: 85%;
-  /* height: 100%; */
   margin-top: -5%;
 }
-.top_head h1 {
+.top_head  {
   color: white;
 }
 
 .top_head {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
+  margin-top: 3rem;
 }
 
 .booking_tab {

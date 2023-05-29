@@ -15,3 +15,15 @@
   list-style: none;
   margin-right: 1rem;
 }
+
+
+.header button {
+  padding: 10px;
+  background-color: chocolate;
+  color: white;
+  border-radius: 10px;
+  font-size: 24px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
