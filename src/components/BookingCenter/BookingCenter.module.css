@@ -8,7 +8,7 @@
 }
 
 .flight_backGround {
-  background: url("https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+  background: url("https://images.pexels.com/photos/4263055/pexels-photo-4263055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
     no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -137,3 +137,13 @@
     width: 100%;
 }
 
+
+.top_head button {
+  padding: 10px 20px;
+  background-color: unset;
+  color: white;
+  margin-top: 1rem;
+  transition:  ease .4s;
+  cursor: pointer;
+  font-weight: bolder;
+}

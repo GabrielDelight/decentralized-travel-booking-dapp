@@ -10,7 +10,7 @@ const FlightBooking = () => {
     passanger: 1,
     LeavingOn: new Date().toISOString().substr(0, 10),
     returningOn: new Date(new Date().setDate(new Date().getDate() + 2)).toISOString().slice(0,10),
-    flightType: "Economy",
+    fareType: "Economy",
     roundTrip: true,
   });
 

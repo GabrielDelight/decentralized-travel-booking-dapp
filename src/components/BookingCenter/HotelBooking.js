@@ -7,8 +7,8 @@ const HotelBooking = () => {
 
   const [formInput, setFormInput] = useState({
     purposeOfTraveling: "",
-    guestNumber: 0,
-    roomNumber: 0,
+    numberOfGuest: 0,
+    numberOfRooms: 0,
     goingTo: "",
     checkIn: new Date().toISOString().substr(0, 10),
     checkOut: new Date(new Date().setDate(new Date().getDate() + 2))
