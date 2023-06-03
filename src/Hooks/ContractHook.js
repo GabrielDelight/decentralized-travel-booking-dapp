@@ -25,14 +25,14 @@ const ContractHook = () => {
 
   let contractInstance = new kit.web3.eth.Contract(
     abiData,
-    "0xd7B20eAbC590E0ac6343F12c56A4C8ea519Cc104"
+    "0x9817dd6F04cAf51e7e2E84f95d50a5b8682EB75d"
   );
 
   useEffect(() => {
     async function isConnectedToContract() {
       try {
         const result = await contractInstance.methods.test().call();
-        console.log("Result:", result);
+        // console.log("Result:", result);
 
         // 1. Get Flight status
         const flightStatusVar = await contractInstance.methods
@@ -51,11 +51,11 @@ const ContractHook = () => {
         setContractBalance(
           new BigNumber(contractBalance).dividedBy(1e18).toString()
         );
-        console.log("contractInstance Balance:", contractBalance);
+        // console.log("contractInstance Balance:", contractBalance);
 
         // Get deposit amount
         const depositBalance = await contractInstance.methods
-          .deposiedAddress(address)
+          .balanceAddress(address)
           .call();
         setDepositBalance(
           new BigNumber(depositBalance).dividedBy(1e18).toString()
@@ -65,9 +65,13 @@ const ContractHook = () => {
       }
     }
     isConnectedToContract();
-  }, []);
 
- 
+    let intervalId = setInterval(() => {
+      isConnectedToContract();
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return {
     contractInstance,
@@ -76,7 +80,7 @@ const ContractHook = () => {
     contractBalance,
     depositBalance,
     kit,
-    address
+    address,
   };
 };
 

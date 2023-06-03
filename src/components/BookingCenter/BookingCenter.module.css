@@ -138,12 +138,28 @@
 }
 
 
-.top_head button {
+.top_head button.deposit_button {
   padding: 10px 20px;
-  background-color: unset;
+  background-color: red;
   color: white;
   margin-top: 1rem;
   transition:  ease .4s;
   cursor: pointer;
   font-weight: bolder;
+  border: none;
+  outline: none;
+}
+
+
+.withdrawal_button {
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  margin-top: 1rem;
+  transition:  ease .4s;
+  cursor: pointer;
+  font-weight: bolder;
+  border: none;
+  outline: none;
+  margin-left: 10px;
 }

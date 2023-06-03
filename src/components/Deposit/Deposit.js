@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContractHook from "../../Hooks/ContractHook";
 import classes from "./Deposit.module.css";
+import Swal from "sweetalert2";
 
 const Deposit = (props) => {
   const [amount, setAmount] = useState("0");
@@ -12,6 +13,7 @@ const Deposit = (props) => {
   };
 
   const onSubmitHandler = () => {
+    if (amount.length < 1) return alert("Please input a value");
     const confirm = window.confirm(
       `Are you sure you want to deposit ${amount} CELO`
     );
@@ -19,7 +21,7 @@ const Deposit = (props) => {
     if (confirm) {
       // Deposit to contractInstance
       contractInstance.methods
-        .depositToContract()
+        .deposit()
         .send({
           from: address,
           value: kit.web3.utils.toWei(amount, "ether"),
@@ -30,10 +32,26 @@ const Deposit = (props) => {
         })
         .on("receipt", (receipt) => {
           console.log("Receipt:", receipt);
+          Swal.fire(
+            "Deposit successful!",
+            `You were successful in adding ${amount} CELO to your booking wallet.`,
+            "success"
+          );
+          setTimeout(() => {
+            props.closeModal();
+          }, 3000)
         })
+
+
 
         .on("error", (error) => {
           console.error("Error: occured", error);
+
+          Swal.fire(
+            "Transaction failed!",
+            `Attempt to deposit to the booking wallet failed in the transaction.`,
+            "error"
+          );
         });
     }
   };

@@ -10,10 +10,8 @@ const Header = () => {
       </div>
       <nav>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Home</li>
+      
+          <li>Booking list</li>
           <li>
             <button onClick={connect}>Wallet connect</button>
           </li>

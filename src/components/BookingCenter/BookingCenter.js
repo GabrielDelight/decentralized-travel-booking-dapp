@@ -3,12 +3,9 @@ import classes from "./BookingCenter.module.css";
 import FlightBooking from "./FlightBooking";
 import HotelBooking from "./HotelBooking";
 import { useCelo } from "@celo/react-celo";
-import Web3 from "web3";
-import { newKitFromWeb3 } from "@celo/contractkit";
-import { abiData } from "../../data/abi";
-import BigNumber from "bignumber.js";
 import ContractHook from "../../Hooks/ContractHook";
 import Deposit from "../Deposit/Deposit";
+import Withdraw from "../Withdraw/Withdraw";
 
 const BookingCenter = () => {
   const { address } = useCelo();
@@ -16,6 +13,7 @@ const BookingCenter = () => {
   const [sfFlight, setIsFlight] = useState(true);
   const onToggleBooking = () => setIsFlight(!sfFlight);
   const [showDeposit, setShowDeposit] = useState(false);
+  const [showWithdraw, setShowWithdraw] = useState(false);
 
   const {
     deposit,
@@ -27,8 +25,12 @@ const BookingCenter = () => {
   } = ContractHook();
 
 
-  const onToggleModal = () => {
+  const onToggleDeposit = () => {
     setShowDeposit(!showDeposit)
+  }
+
+  const onToggleWithdraw = () => {
+    setShowWithdraw(!showWithdraw)
   }
   return (
     <>
@@ -43,10 +45,11 @@ const BookingCenter = () => {
           <div className={classes.top_head}>
             <h1>Decentralized Travel Booking DAPP</h1>
             <div>
-              <h3>Contract Balance: ETH {contractBalance.substr(0, 7)} </h3>
-              <h3>My Balance: ETH {depositBalance.substr(0, 7)} </h3>
-              <h3>MetaMask Balance: {metamaskWallet.substr(0, 7)}</h3>
-              <button onClick={onToggleModal}>Deposit</button>
+              <h3>Contract Balance:  {contractBalance.substr(0, 7)} CELO</h3>
+              <h3>My Balance:  {depositBalance.substr(0, 7)} CELO</h3>
+              <h3>MetaMask Balance: {metamaskWallet.substr(0, 7)} CELO</h3>
+              <button className={classes.deposit_button} onClick={onToggleDeposit}>Deposit</button>
+              <button className={classes.withdrawal_button} onClick={onToggleWithdraw} >Balance withdraw</button>
             </div>
           </div>
           <br />
@@ -72,8 +75,9 @@ const BookingCenter = () => {
         </div>
       </section>
       {showDeposit && 
-      <Deposit closeModal={onToggleModal} />
+      <Deposit closeModal={onToggleDeposit} />
       }
+      {showWithdraw && <Withdraw closeModal={onToggleWithdraw} />}
     </>
   );
 };
