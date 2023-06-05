@@ -156,6 +156,8 @@ contract HotelBooking is FlightBooking {
             uint256(1 ether)
         );
         hotelBookingAddress[msg.sender] = booking;
+        balanceAddress[msg.sender] -= 1 ether; // Deducting funds (1 ether)
+
     }
 }
 
