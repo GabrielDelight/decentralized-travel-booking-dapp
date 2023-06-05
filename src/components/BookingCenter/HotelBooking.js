@@ -32,7 +32,7 @@ const HotelBooking = () => {
 
   const onPayHandler = () => {
     if (depositBalance < 1) {
-      Swal.fire(
+      return Swal.fire(
         "Insufficient funds!",
         `Insufficient funds please fund your account and try again later.`,
         "error"
