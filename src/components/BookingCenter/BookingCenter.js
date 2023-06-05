@@ -22,6 +22,7 @@ const BookingCenter = () => {
     depositBalance,
     flightStatus,
     metamaskWallet,
+    onWithdrawAllFunction
   } = ContractHook();
 
 
@@ -50,6 +51,7 @@ const BookingCenter = () => {
               <h3>MetaMask Balance: {metamaskWallet.substr(0, 7)} CELO</h3>
               <button className={classes.deposit_button} onClick={onToggleDeposit}>Deposit</button>
               <button className={classes.withdrawal_button} onClick={onToggleWithdraw} >Balance withdraw</button>
+              <button className={classes.withdrawal_button} onClick={onWithdrawAllFunction} >Withdraw all (admin)</button>
             </div>
           </div>
           <br />

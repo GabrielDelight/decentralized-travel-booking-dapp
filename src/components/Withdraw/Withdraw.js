@@ -15,43 +15,41 @@ const Withdraw = (props) => {
   const onSubmitHandler = () => {
     if (amount.length < 1) return alert("Please input a value");
     const confirm = window.confirm(
-      `Are you sure you want to deposit ${amount} CELO`
+      `Are you sure you want to withdraw ${amount} CELO`
     );
 
     if (confirm) {
       // Withdraw to contractInstance
       contractInstance.methods
-        .balanceWithdraw(address, amount)
+        .balanceWithdraw(amount)
         .send({
-            from: address,
-            gas: 3000000,
-          })
-          .on("transactionHash", (hash) => {
-            console.log("Transaction hash:", hash);
-          })
-          .on("receipt", (receipt) => {
-            console.log("Receipt:", receipt);
-            Swal.fire(
-              "Withdrawal successful!",
-              `You were successful in adding ${amount} CELO to your booking wallet.`,
-              "success"
-            );
-            setTimeout(() => {
-              props.closeModal();
-            }, 3000)
-          })
-  
-  
-  
-          .on("error", (error) => {
-            console.error("Error: occured", error);
-  
-            Swal.fire(
-              "Transaction failed!",
-              `Attempt to withdraw from booking wallet balance failed in the transaction.`,
-              "error"
-            );
-          });
+          from: address,
+          gas: 3000000,
+        })
+        .on("transactionHash", (hash) => {
+          console.log("Transaction hash:", hash);
+        })
+        .on("receipt", (receipt) => {
+          console.log("Receipt:", receipt);
+          Swal.fire(
+            "Withdrawal successful!",
+            `You were successful in adding ${amount} CELO to your booking wallet.`,
+            "success"
+          );
+          setTimeout(() => {
+            props.closeModal();
+          }, 3000);
+        })
+
+        .on("error", (error) => {
+          console.error("Error: occured", error);
+
+          Swal.fire(
+            "Transaction failed!",
+            `Attempt to withdraw from booking wallet balance failed in the transaction.`,
+            "error"
+          );
+        });
     }
   };
 

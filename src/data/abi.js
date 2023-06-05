@@ -2,11 +2,6 @@ export const abiData = [
 	{
 		"inputs": [
 			{
-				"internalType": "address payable",
-				"name": "to",
-				"type": "address"
-			},
-			{
 				"internalType": "uint256",
 				"name": "_amount",
 				"type": "uint256"
@@ -55,8 +50,13 @@ export const abiData = [
 			},
 			{
 				"internalType": "string",
-				"name": "roundTrip",
+				"name": "itinerary",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numberOfPassangers",
+				"type": "uint256"
 			}
 		],
 		"name": "FlightBookings",
@@ -217,8 +217,13 @@ export const abiData = [
 			},
 			{
 				"internalType": "string",
-				"name": "roundTrip",
+				"name": "itinerary",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "numberOfPassangers",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

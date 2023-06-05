@@ -4,6 +4,8 @@ import Web3 from "web3";
 import { newKitFromWeb3 } from "@celo/contractkit";
 import { abiData } from "../data/abi";
 import BigNumber from "bignumber.js";
+import Swal from "sweetalert2";
+
 
 const ContractHook = () => {
   const { address } = useCelo();
@@ -25,7 +27,7 @@ const ContractHook = () => {
 
   let contractInstance = new kit.web3.eth.Contract(
     abiData,
-    "0x9817dd6F04cAf51e7e2E84f95d50a5b8682EB75d"
+    "0xede85CC5D9d4Fe9Fa014f02495290659DC55eB98"
   );
 
   useEffect(() => {
@@ -73,6 +75,39 @@ const ContractHook = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+
+  const onWithdrawAllFunction = () => {
+    contractInstance.methods.withdrawAllFunds().send({
+      from: address,
+      gas: 3000000
+    })
+
+    .on("transactionHash", (hash) => {
+      console.log("Transaction hash:", hash);
+    })
+    .on("receipt", (receipt) => {
+      console.log("Receipt:", receipt);
+      Swal.fire(
+        "Withdrawal successful!",
+        `You were successful withdraw to your booking wallet.`,
+        "success"
+      );
+     
+    })
+
+    .on("error", (error) => {
+      console.error("Error: occured", error);
+
+      Swal.fire(
+        "Transaction failed!",
+        `Attempt to withdraw from booking wallet balance failed in the transaction.`,
+        "error"
+      );
+    });
+  }
+
+
+
   return {
     contractInstance,
     metamaskWallet,
@@ -81,6 +116,7 @@ const ContractHook = () => {
     depositBalance,
     kit,
     address,
+    onWithdrawAllFunction
   };
 };
 

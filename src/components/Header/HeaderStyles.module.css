@@ -17,7 +17,7 @@
 }
 
 
-.header button {
+.header button.wallet_connect {
   padding: 10px;
   background-color: chocolate;
   color: white;
@@ -27,3 +27,20 @@
   outline: none;
   cursor: pointer;
 }
+
+.header button {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+
+ /* .nav button {
+  padding: 10px 20px;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 10px;
+  font-size: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+} */
