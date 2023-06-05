@@ -3,6 +3,7 @@ import ContractHook from "../../Hooks/ContractHook";
 import classes from "./BookingCenter.module.css";
 import CustomInput from "./CustomInput";
 import Swal from "sweetalert2";
+import Loading from "../LoadingIcon/Loading";
 
 const FlightBooking = () => {
   const [formInput, setFormInput] = useState({
@@ -18,6 +19,9 @@ const FlightBooking = () => {
     itinerary: "One way",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
+
   const onChangeHandler = (e) => {
     setFormInput((prevState) => {
       return {
@@ -27,30 +31,27 @@ const FlightBooking = () => {
     });
   };
 
-  const { contractInstance, address, depositBalance, contractBalance } = ContractHook();
+  const { contractInstance, address, depositBalance } = ContractHook();
 
   const onPayHandler = () => {
+    if (depositBalance < 2) {
+      Swal.fire(
+        "Insufficient funds!",
+        `Insufficient funds please fund your account and try again later.`,
+        "error"
+      );
+    }
 
-    if(depositBalance > 2)
-    console.log(formInput);
-
-    console.log(formInput)
-
-    let fareTypes = formInput.fareType;
-    let LeavingOn = formInput.LeavingOn;
-    let returningOn = formInput.returningOn;
-    let toWhere = formInput.toWhere;
-    let itinerary = formInput.itinerary;
-    let numberOfPassanger = parseInt(formInput.numberOfPassangers);
+    setIsLoading(true)
 
     contractInstance.methods
       .FlightBookings(
-        fareTypes,
-        LeavingOn,
-        returningOn,
-        toWhere,
-        itinerary,
-        numberOfPassanger
+        formInput.fareType,
+        formInput.LeavingOn,
+        formInput.returningOn,
+        formInput.toWhere,
+        formInput.itinerary,
+        parseInt(formInput.numberOfPassangers)
       )
       .send({
         from: address,
@@ -66,6 +67,7 @@ const FlightBooking = () => {
           `You were successful in booking a fligt.`,
           "success"
         );
+        setIsLoading(false)
       })
 
       .on("error", (error) => {
@@ -75,6 +77,7 @@ const FlightBooking = () => {
           `Attempt to withdraw from booking wallet balance failed in the transaction.`,
           "error"
         );
+        setIsLoading(false)
       });
   };
 
@@ -117,7 +120,18 @@ const FlightBooking = () => {
             value={formInput.fromWhere}
           />
           <datalist id="address1">
-            <option defaultValue value={"Afganistan"}></option>
+            <option value="USA">United States of America</option>
+            <option value="CAN">Canada</option>
+            <option value="GBR">United Kingdom</option>
+            <option value="GER">Germany</option>
+            <option defaultValue value="FRA">
+              France
+            </option>
+            <option value="JPN">Japan</option>
+            <option value="AUS">Australia</option>
+            <option value="BRA">Brazil</option>
+            <option value="IND">India</option>
+            <option value="CHN">China</option>
           </datalist>
         </CustomInput>
 
@@ -157,8 +171,11 @@ const FlightBooking = () => {
             </CustomInput>
           </div>
           <div className={classes.booking_button}>
-            <button onClick={onPayHandler}>Book now</button>
-          </div>
+          {!isLoading ? (
+              <button onClick={onPayHandler}>Book now</button>
+            ) : (
+              <Loading />
+            )}          </div>
         </div>
       </div>
       <div className={classes.info_tab}>

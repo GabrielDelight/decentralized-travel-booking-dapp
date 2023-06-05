@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import ContractHook from "../../Hooks/ContractHook";
 import classes from "./Withdraw.module.css";
 import Swal from "sweetalert2";
+import Loading from "../LoadingIcon/Loading";
 
 const Withdraw = (props) => {
   const [amount, setAmount] = useState("0");
-
+  const [isLoading, setIsLoading] = useState(false);
   const { contractInstance, kit, address } = ContractHook();
 
   const onChnageHandler = (el) => {
@@ -20,6 +21,8 @@ const Withdraw = (props) => {
 
     if (confirm) {
       // Withdraw to contractInstance
+      setIsLoading(true);
+
       contractInstance.methods
         .balanceWithdraw(amount)
         .send({
@@ -36,6 +39,8 @@ const Withdraw = (props) => {
             `You were successful in adding ${amount} CELO to your booking wallet.`,
             "success"
           );
+          setIsLoading(false);
+
           setTimeout(() => {
             props.closeModal();
           }, 3000);
@@ -49,6 +54,8 @@ const Withdraw = (props) => {
             `Attempt to withdraw from booking wallet balance failed in the transaction.`,
             "error"
           );
+          setIsLoading(false);
+
         });
     }
   };
@@ -74,7 +81,12 @@ const Withdraw = (props) => {
           <br />
           <br />
           <br />
+
+          {!isLoading ? (
           <button onClick={onSubmitHandler}>Withdraw CELO</button>
+            ) : (
+              <Loading />
+            )}
         </div>
       </div>
     </div>

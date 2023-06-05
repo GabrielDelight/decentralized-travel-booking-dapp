@@ -1,20 +1,23 @@
 import React, { useState } from "react";
+import ContractHook from "../../Hooks/ContractHook";
 import classes from "./BookingCenter.module.css";
 import CustomInput from "./CustomInput";
-
+import Swal from "sweetalert2";
+import Loading from "../LoadingIcon/Loading";
 
 const HotelBooking = () => {
-
   const [formInput, setFormInput] = useState({
-    purposeOfTraveling: "",
-    numberOfGuest: 0,
-    numberOfRooms: 0,
+    purposeOfTraveling: "Business",
+    numberOfGuest: 1,
+    numberOfRooms: 1,
     goingTo: "",
     checkIn: new Date().toISOString().substr(0, 10),
     checkOut: new Date(new Date().setDate(new Date().getDate() + 2))
       .toISOString()
       .slice(0, 10),
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChangeHandler = (e) => {
     setFormInput((prevState) => {
@@ -25,8 +28,53 @@ const HotelBooking = () => {
     });
   };
 
+  const { contractInstance, address, depositBalance } = ContractHook();
+
   const onPayHandler = () => {
-    console.log("====>", formInput);
+    if (depositBalance < 1) {
+      Swal.fire(
+        "Insufficient funds!",
+        `Insufficient funds please fund your account and try again later.`,
+        "error"
+      );
+    }
+    setIsLoading(true);
+
+    contractInstance.methods
+      .HotelBookings(
+        formInput.goingTo,
+        parseInt(formInput.numberOfGuest),
+        parseInt(formInput.numberOfRooms),
+        formInput.purposeOfTraveling,
+        formInput.checkIn,
+        formInput.checkOut
+      )
+      .send({
+        from: address,
+        gas: 3000000,
+      })
+      .on("transactionHash", (hash) => {
+        console.log("Transaction hash:", hash);
+      })
+      .on("receipt", (receipt) => {
+        console.log("Receipt:", receipt);
+        Swal.fire(
+          "Booking successful!",
+          `You were successful in booking a fligt.`,
+          "success"
+        );
+        setIsLoading(false);
+      })
+
+      .on("error", (error) => {
+        console.error("Error: occured", error);
+        Swal.fire(
+          "Transaction failed!",
+          `Attempt to withdraw from booking wallet balance failed in the transaction.`,
+          "error"
+        );
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -37,7 +85,9 @@ const HotelBooking = () => {
           name="purposeOfTraveling"
           onChange={onChangeHandler}
         >
-          <option>WHAT ARE YOU TRAVELLING FOR?</option>
+          <option value="Business">
+            WHAT ARE YOU TRAVELLING FOR? (Buesiness?){" "}
+          </option>
           <option value="Business">Business</option>
           <option value="Liesure">Liesure</option>
         </select>
@@ -46,7 +96,7 @@ const HotelBooking = () => {
         <select
           onChange={onChangeHandler}
           value={formInput.guestNumber}
-          name="guestNumber"
+          name="numberOfGuest"
         >
           <option value="1">1 Guest</option>
           <option value="2">2 Guests</option>
@@ -61,7 +111,7 @@ const HotelBooking = () => {
         <select
           onChange={onChangeHandler}
           value={formInput.roomNumber}
-          name="roomNumber"
+          name="numberOfRooms"
         >
           <option value="1">1 Room</option>
           <option value="2">2 Rooms</option>
@@ -85,7 +135,18 @@ const HotelBooking = () => {
             placeholder="Destination, city or hotel name"
           />
           <datalist id="address1" onChange={onChangeHandler}>
-            <option defaultValue value={"Afganistan"}></option>
+            <option value="USA">United States of America</option>
+            <option value="CAN">Canada</option>
+            <option value="GBR">United Kingdom</option>
+            <option value="GER">Germany</option>
+            <option defaultValue value="FRA">
+              France
+            </option>
+            <option value="JPN">Japan</option>
+            <option value="AUS">Australia</option>
+            <option value="BRA">Brazil</option>
+            <option value="IND">India</option>
+            <option value="CHN">China</option>{" "}
           </datalist>
         </CustomInput>
 
@@ -111,7 +172,11 @@ const HotelBooking = () => {
             </CustomInput>
           </div>
           <div className={classes.booking_button}>
-            <button onClick={onPayHandler}>Book now</button>
+            {!isLoading ? (
+              <button onClick={onPayHandler}>Book now</button>
+            ) : (
+              <Loading />
+            )}
           </div>
         </div>
       </div>

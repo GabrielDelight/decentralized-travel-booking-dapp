@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import ContractHook from "../../Hooks/ContractHook";
 import classes from "./Deposit.module.css";
 import Swal from "sweetalert2";
+import Loading from "../LoadingIcon/Loading";
 
 const Deposit = (props) => {
   const [amount, setAmount] = useState("0");
-
+  const [isLoading, setIsLoading] = useState(false);
   const { contractInstance, kit, address } = ContractHook();
 
   const onChnageHandler = (el) => {
@@ -20,6 +21,8 @@ const Deposit = (props) => {
 
     if (confirm) {
       // Deposit to contractInstance
+      setIsLoading(true);
+
       contractInstance.methods
         .deposit()
         .send({
@@ -37,12 +40,13 @@ const Deposit = (props) => {
             `You were successful in adding ${amount} CELO to your booking wallet.`,
             "success"
           );
+
+          setIsLoading(false);
+
           setTimeout(() => {
             props.closeModal();
-          }, 3000)
+          }, 3000);
         })
-
-
 
         .on("error", (error) => {
           console.error("Error: occured", error);
@@ -52,6 +56,7 @@ const Deposit = (props) => {
             `Attempt to deposit to the booking wallet failed in the transaction.`,
             "error"
           );
+          setIsLoading(false);
         });
     }
   };
@@ -77,7 +82,11 @@ const Deposit = (props) => {
           <br />
           <br />
           <br />
-          <button onClick={onSubmitHandler}>Deposit CELO</button>
+          {!isLoading ? (
+              <button onClick={onSubmitHandler}>Deposit CELO</button>
+            ) : (
+              <Loading />
+            )}
         </div>
       </div>
     </div>
