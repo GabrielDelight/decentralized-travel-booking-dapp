@@ -16,11 +16,8 @@ const BookingCenter = () => {
   const [showWithdraw, setShowWithdraw] = useState(false);
 
   const {
-    deposit,
-    contractInstance,
     contractBalance,
     depositBalance,
-    flightStatus,
     metamaskWallet,
     onWithdrawAllFunction
   } = ContractHook();

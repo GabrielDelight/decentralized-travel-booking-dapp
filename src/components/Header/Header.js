@@ -24,7 +24,7 @@ const Header = () => {
     <>
       <header className={classes.header}>
         <div className={classes.logo}>
-          <h1>DTBD</h1>
+          <h1>CryptoTraveler</h1>
         </div>
 
         <div>
