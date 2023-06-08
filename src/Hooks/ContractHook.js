@@ -89,7 +89,7 @@ const ContractHook = () => {
       console.log("Receipt:", receipt);
       Swal.fire(
         "Withdrawal successful!",
-        `You were successful withdraw to your booking wallet.`,
+        `You have successfully transferred all funds from the contract wallet to your booking address.        .`,
         "success"
       );
      

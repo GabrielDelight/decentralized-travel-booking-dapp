@@ -36,7 +36,7 @@ const Withdraw = (props) => {
           console.log("Receipt:", receipt);
           Swal.fire(
             "Withdrawal successful!",
-            `You were successful in adding ${amount} CELO to your booking wallet.`,
+            `You were successful in withdrawing ${amount} CELO from your booking wallet.`,
             "success"
           );
           setIsLoading(false);

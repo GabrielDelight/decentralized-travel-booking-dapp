@@ -148,6 +148,7 @@
   font-weight: bolder;
   border: none;
   outline: none;
+  margin-right: 10px;
 }
 
 
@@ -161,5 +162,4 @@
   font-weight: bolder;
   border: none;
   outline: none;
-  margin-left: 10px;
 }

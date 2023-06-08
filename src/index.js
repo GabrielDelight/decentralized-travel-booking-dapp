@@ -21,17 +21,7 @@ root.render(
     // This options changes the title of the modal and can be either a string or a react element
     title: <span>Connect your Wallet</span>,
     providersOptions: {
-      // This option hides specific wallets from the default list
-      // hideFromDefaults: [
-      //   SupportedProvider.MetaMask,
-      //   SupportedProvider.PrivateKey,
-      //   SupportedProvider.CeloExtensionWallet,
-      //   SupportedProvider.Valora,
-      // ],
-
-      // // This option hides all default wallets
-      // hideFromDefaults: true,
-
+    
       // This option toggles on and off the searchbar
       searchable: true,
     },
