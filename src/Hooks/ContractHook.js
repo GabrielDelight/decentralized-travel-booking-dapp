@@ -6,13 +6,8 @@ import { abiData } from "../data/abi";
 import BigNumber from "bignumber.js";
 import Swal from "sweetalert2";
 
-
 const ContractHook = () => {
   const { address } = useCelo();
-
-  const [sfFlight, setIsFlight] = useState(true);
-  const onToggleBooking = () => setIsFlight(!sfFlight);
-
   const [depositBalance, setDepositBalance] = useState("");
   const [contractBalance, setContractBalance] = useState("");
   const [flightStatus, setFlightStatus] = useState("");
@@ -34,14 +29,12 @@ const ContractHook = () => {
     async function isConnectedToContract() {
       try {
         const result = await contractInstance.methods.test().call();
-        // console.log("Result:", result);
 
         // 1. Get Flight status
         const flightStatusVar = await contractInstance.methods
           .flightStatus()
           .call();
         setFlightStatus(flightStatusVar);
-        // contractInstance.methods.
 
         // Get metamask balance
         let balance = await kit.web3.eth.getBalance(address);
@@ -53,7 +46,6 @@ const ContractHook = () => {
         setContractBalance(
           new BigNumber(contractBalance).dividedBy(1e18).toString()
         );
-        // console.log("contractInstance Balance:", contractBalance);
 
         // Get deposit amount
         const depositBalance = await contractInstance.methods
@@ -75,38 +67,36 @@ const ContractHook = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-
   const onWithdrawAllFunction = () => {
-    contractInstance.methods.withdrawAllFunds().send({
-      from: address,
-      gas: 3000000
-    })
+    contractInstance.methods
+      .withdrawAllFunds()
+      .send({
+        from: address,
+        gas: 3000000,
+      })
 
-    .on("transactionHash", (hash) => {
-      console.log("Transaction hash:", hash);
-    })
-    .on("receipt", (receipt) => {
-      console.log("Receipt:", receipt);
-      Swal.fire(
-        "Withdrawal successful!",
-        `You have successfully transferred all funds from the contract wallet to your booking address.        .`,
-        "success"
-      );
-     
-    })
+      .on("transactionHash", (hash) => {
+        console.log("Transaction hash:", hash);
+      })
+      .on("receipt", (receipt) => {
+        console.log("Receipt:", receipt);
+        Swal.fire(
+          "Withdrawal successful!",
+          `You have successfully transferred all funds from the contract wallet to your booking address.        .`,
+          "success"
+        );
+      })
 
-    .on("error", (error) => {
-      console.error("Error: occured", error);
+      .on("error", (error) => {
+        console.error("Error: occured", error);
 
-      Swal.fire(
-        "Transaction failed!",
-        `Attempt to withdraw from booking wallet balance failed in the transaction.`,
-        "error"
-      );
-    });
-  }
-
-
+        Swal.fire(
+          "Transaction failed!",
+          `Attempt to withdraw from booking wallet balance failed in the transaction.`,
+          "error"
+        );
+      });
+  };
 
   return {
     contractInstance,
@@ -116,7 +106,7 @@ const ContractHook = () => {
     depositBalance,
     kit,
     address,
-    onWithdrawAllFunction
+    onWithdrawAllFunction,
   };
 };
 
