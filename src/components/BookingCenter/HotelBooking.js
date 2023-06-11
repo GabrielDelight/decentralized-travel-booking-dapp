@@ -60,7 +60,7 @@ const HotelBooking = () => {
         console.log("Receipt:", receipt);
         Swal.fire(
           "Booking successful!",
-          `You were successful in booking a fligt.`,
+          `Your hotel booking was successful.`,
           "success"
         );
         setIsLoading(false);
@@ -181,7 +181,7 @@ const HotelBooking = () => {
         </div>
       </div>
       <div className={classes.info_tab}>
-        <p>Payments are in etheruem</p>
+          <p>CELO Blockchain </p>{" "}
       </div>
     </div>
   );

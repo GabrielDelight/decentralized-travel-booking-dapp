@@ -20,7 +20,6 @@ const Deposit = (props) => {
     );
 
     if (confirm) {
-      // Deposit to contractInstance
       setIsLoading(true);
 
       contractInstance.methods
@@ -77,7 +76,7 @@ const Deposit = (props) => {
           <input
             onChange={onChnageHandler}
             type={"number"}
-            placeholder="0.00 CELO"
+            placeholder="1 CELO"
           />
           <br />
           <br />

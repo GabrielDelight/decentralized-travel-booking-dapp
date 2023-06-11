@@ -21,7 +21,6 @@ const FlightBooking = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-
   const onChangeHandler = (e) => {
     setFormInput((prevState) => {
       return {
@@ -42,7 +41,7 @@ const FlightBooking = () => {
       );
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     contractInstance.methods
       .FlightBookings(
@@ -67,7 +66,7 @@ const FlightBooking = () => {
           `You were successful in booking a fligt.`,
           "success"
         );
-        setIsLoading(false)
+        setIsLoading(false);
       })
 
       .on("error", (error) => {
@@ -77,7 +76,7 @@ const FlightBooking = () => {
           `Attempt to withdraw from booking wallet balance failed in the transaction.`,
           "error"
         );
-        setIsLoading(false)
+        setIsLoading(false);
       });
   };
 
@@ -171,15 +170,16 @@ const FlightBooking = () => {
             </CustomInput>
           </div>
           <div className={classes.booking_button}>
-          {!isLoading ? (
+            {!isLoading ? (
               <button onClick={onPayHandler}>Book now</button>
             ) : (
               <Loading />
-            )}          </div>
+            )}{" "}
+          </div>
         </div>
       </div>
       <div className={classes.info_tab}>
-        <p>Payments are in etheruem</p>
+        <p>CELO Blockchain </p>{" "}
       </div>
     </div>
   );

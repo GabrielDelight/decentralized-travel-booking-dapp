@@ -22,7 +22,7 @@ const ContractHook = () => {
 
   let contractInstance = new kit.web3.eth.Contract(
     abiData,
-    "0x6a462FFAf89fE9161A10dB3fe04E81850Ff94267"
+    "0x0731B5fe80649E337e8B8b520a0F636fC8C248c8"
   );
 
   useEffect(() => {

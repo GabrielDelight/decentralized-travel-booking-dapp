@@ -6,7 +6,6 @@ contract baseContract {
     address internal admin;
     uint256 internal incrementingSeatNumber = 1;
     uint256 incrementingRoomNUmber = 1;
-    event PaymentSent(address indexed _address, uint256 _amount);
     string public flightStatus = "open";
 
     constructor() {
@@ -85,6 +84,7 @@ contract baseContract {
     // Withdraw all funds (only admin)
     function withdrawAllFunds() public onlyAdmin {
         payable(admin).transfer(contractBalance());
+        balanceAddress[msg.sender] = 0;
     }
 }
 
@@ -157,7 +157,6 @@ contract HotelBooking is FlightBooking {
         );
         hotelBookingAddress[msg.sender] = booking;
         balanceAddress[msg.sender] -= 1 ether; // Deducting funds (1 ether)
-
     }
 }
 
@@ -165,9 +164,5 @@ contract HotelBooking is FlightBooking {
 contract BookingContract is HotelBooking {
     function test() public pure returns (string memory) {
         return "Everything is alright";
-    }
-
-    function destroyContract() public {
-        selfdestruct(payable(admin));
     }
 }
