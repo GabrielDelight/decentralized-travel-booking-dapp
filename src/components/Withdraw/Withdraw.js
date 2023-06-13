@@ -9,7 +9,7 @@ const Withdraw = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { contractInstance, kit, address } = ContractHook();
 
-  const onChnageHandler = (el) => {
+  const onChangeHandler = (el) => {
     setAmount(el.target.value);
   };
 
@@ -74,7 +74,7 @@ const Withdraw = (props) => {
         <br></br>
         <div>
           <input
-            onChange={onChnageHandler}
+            onChange={onChangeHandler}
             type={"number"}
             placeholder="1.00 CELO"
           />

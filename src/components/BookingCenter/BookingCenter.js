@@ -8,8 +8,6 @@ import Deposit from "../Deposit/Deposit";
 import Withdraw from "../Withdraw/Withdraw";
 
 const BookingCenter = () => {
-  const { address } = useCelo();
-
   const [sfFlight, setIsFlight] = useState(true);
   const onToggleBooking = () => setIsFlight(!sfFlight);
   const [showDeposit, setShowDeposit] = useState(false);
